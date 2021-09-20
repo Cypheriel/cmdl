@@ -8,6 +8,7 @@
 If this cannot be done automatically, the type remains a string.
 
 <h3>Usage</h3>
+
 ```python3
 from cmdl import CommandLine
 
