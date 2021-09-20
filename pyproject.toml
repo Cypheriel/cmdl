@@ -1,21 +1,20 @@
 [tool.poetry]
 name = "cmdl"
 version = "0.1.0"
-description = ""
-authors = ["Your Name <you@example.com>"]
+description = "Simple command-line parser written in Python."
+authors = ["Cypheriel <cypheriel@github.com>"]
 packages = [
     { include = "cmdl", from = "src" },
 ]
 
 [tool.poetry.dependencies]
-python = "^3.10"
-rich = "^10.9.0"
+python = "^3.7"
 
 [tool.poetry.group.dev.dependencies]
-flake8 = "^3.9.2"
 black = "^21.9-beta.0"
 pre-commit = "^2.15.0"
 pep8-naming = "^0.12.1"
+flake8 = "^3.9.2"
 flake8-quotes = "^3.3.0"
 flake8-docstrings = "^1.6.0"
 
