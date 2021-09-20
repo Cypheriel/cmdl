@@ -1,8 +1,10 @@
+from __future__ import annotations
+
 from abc import ABCMeta
 from inspect import signature, Parameter
 from shlex import split
 from types import NoneType
-from typing import Optional, Callable, Any, Mapping, get_origin, Union, get_args, Iterable
+from typing import Optional, Callable, Any, Mapping, get_origin, Union, get_args, Iterable, Type, Generator
 
 from rich.console import Console
 
@@ -20,7 +22,7 @@ def convert_args(parameters: Mapping[str, Parameter], *args: str) -> Iterable[An
     :return: Iterable containing converted arguments.
     """
 
-    def converter():
+    def converter() -> Generator[Type]:
         param_type = None
         for param in parameters.values():
             param_type = param.annotation
@@ -43,27 +45,51 @@ def convert_args(parameters: Mapping[str, Parameter], *args: str) -> Iterable[An
 
 
 class Alias(str):
+    """Alias objects to distinguish between command names and alias names."""
+
     pass
 
 
 class Command(Callable, metaclass=ABCMeta):
+    """Command class to type-hint `Command` functions for use in `CommandLine.register`."""
+
     name: str
     description: str
     aliases: list[str]
 
-    def __call__(self, *args, **kwargs):
+    def __call__(self: Command, *args: Any, **kwargs: Any) -> None:
+        """Skeleton for function call."""
         pass
 
 
 class CommandLine:
-    def __init__(self):
+    """CommandLine class registers, holds, and executes `Command`s."""
+
+    def __init__(self: CommandLine) -> None:
+        """Initialize `CommandLine` with blank dictionary."""
         self.commands: dict[str, Command] = {}
 
-    def register(self, name: str, description: str, aliases: Optional[list[str]] = None):
+    def register(
+        self: CommandLine, name: str, description: str, aliases: Optional[list[str]] = None
+    ) -> Callable[[Command], Command]:
+        """
+        Register a `Command` from a function.
+
+        :param name: Command name.
+        :param description: Command description.
+        :param aliases: Command aliases.
+        :return: Command registration decorator.
+        """
         if aliases is None:
             aliases = []
 
-        def decorator(command: Command):
+        def decorator(command: Command) -> Command:
+            """
+            Assign attributes to `Command` and register it.
+
+            :param command: Callable function.
+            :return: Command object.
+            """
             command.name = name
             command.description = description
             command.aliases = aliases
@@ -76,7 +102,13 @@ class CommandLine:
 
         return decorator
 
-    def execute(self, command: str):
+    def execute(self: CommandLine, command: str) -> None:
+        """
+        Execute `command` string as command.
+
+        :param command: Command input.
+        :return: None
+        """
         args: list[str] = split(command, comments=True)
         command = self.commands.get(args[0].lower())
 
