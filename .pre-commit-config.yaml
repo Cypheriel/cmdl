@@ -15,8 +15,9 @@ repos:
     -   id: flake8
         additional_dependencies:
           - pep8-naming
-          - flake8-quotes
+          - flake8-annotations
           - flake8-docstrings
+          - flake8-quotes
         args: [--inline-quotes='"', --multiline-quotes='"', --max-line-length=120]
 
 -   repo: https://github.com/psf/black
