@@ -18,11 +18,11 @@ repos:
           - flake8-annotations
           - flake8-docstrings
           - flake8-quotes
-        args: [--inline-quotes='"', --multiline-quotes='"', --max-line-length=120]
+        args: [--inline-quotes=", --multiline-quotes=", --max-line-length=120]
 
 -   repo: https://github.com/psf/black
     rev: 21.9b0
     hooks:
     - id: black
       language_version: python3.10
-      args: [-l=120]
+      args: [-l 120]
