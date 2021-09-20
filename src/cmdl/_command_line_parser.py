@@ -118,9 +118,7 @@ class CommandLine:
                 command(*converted_args)
 
             except ArgumentError:
-                console.print("[red]Error[/]: Invalid arguments.")
+                console.print("[red]Error[/]: Invalid arguments.\n")
 
         else:
-            console.print(f"[red]Error[/]: Invalid command '{command}'.")
-
-        print()
+            console.print(f"[red]Error[/]: Invalid command '{command}'.\n")
