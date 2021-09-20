@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "cmdl"
-version = "0.1.0"
+version = "0.1.1"
 description = "Simple command-line parser written in Python."
 authors = ["Cypheriel <cypheriel@github.com>"]
 packages = [
