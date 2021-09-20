@@ -17,6 +17,7 @@ repos:
           - pep8-naming
           - flake8-quotes
           - flake8-docstrings
+        args: [--inline-quotes='"', --multiline-quotes='"', --max-line-length=120]
 
 -   repo: https://github.com/psf/black
     rev: 21.9b0
