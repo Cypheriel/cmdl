@@ -18,7 +18,7 @@ cmdl = CommandLine()
 @cmdl.register(name="add", aliases=["sum"], description="Add arguments as numbers.", )
 def add_command(*args: int) -> None:
     # Note the annotations of `*args: int`.
-    # Here, the args are converted to `int` (from `str)` automatically.
+    # Here, the args are converted to `int` (from `str`) automatically.
     print(f"Sum: {sum(args)}")
 
     
